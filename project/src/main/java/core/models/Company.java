@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Company {
-    public String name;
-    public String catchPhrase;
-    public String bs;
+    private String name;
+    private String catchPhrase;
+    private String bs;
 }

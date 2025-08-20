@@ -1,7 +1,8 @@
 package core.settings;
 
 public enum ApiEndpoints {
-    USERS("/users");
+    USERS("/users"),
+    POSTS("/posts");
 
     private final String path;
 

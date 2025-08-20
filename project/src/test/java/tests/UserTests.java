@@ -1,10 +1,8 @@
 package tests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.common.mapper.TypeRef;
 import core.clients.APIClient;
-import core.models.Root;
+import core.models.ResponseGetUser;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,30 +16,31 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UserTests {
     private APIClient apiClient;
-    private ObjectMapper objectMapper;
 
     @BeforeEach
     public void setup() {
         apiClient = new APIClient();
-        objectMapper = new ObjectMapper();
     }
+
     @Test
-    void testGetUsers() throws JsonProcessingException {
+    void testGetUsers() {
+        step("Отправка запроса на получения списка пользователей");
         Response response = apiClient.getUsers();
 
         step("Проверка статус-кода");
-        assertEquals(200,response.getStatusCode(),"Статус код должен быть 200");
+        assertEquals(200, response.getStatusCode(), "Статус код должен быть 200");
 
-        step("Десериализация JSON-ответа в объект SingleUserResponse");
-        String responseBody = response.getBody().asString();
-        List<Root> roots = objectMapper.readValue(responseBody, new TypeReference<List<Root>>() {});
+        step("Десериализация JSON-ответа в объект ResponseGetUser");
+        List<ResponseGetUser> responseGetUsers = response.as(new TypeRef<List<ResponseGetUser>>() {
+        });
 
         step("Проверяем, что список не пустой");
-        assertThat(roots).isNotEmpty();
+        assertThat(responseGetUsers).isNotEmpty();
 
-        for (Root root : roots){
-            assertNotNull(root.getName());
-            assertNotNull(root.getEmail());
+        step("У каждого пользователя заполнены name и email");
+        for (ResponseGetUser responseGetUser : responseGetUsers) {
+            assertNotNull(responseGetUser.getName());
+            assertNotNull(responseGetUser.getEmail());
         }
     }
 }
