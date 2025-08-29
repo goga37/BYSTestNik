@@ -1,10 +1,8 @@
 package tests;
 
 
-import core.clients.APIClient;
 import core.models.ResponseCreateUser;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -12,13 +10,7 @@ import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class PostCreateTests {
-    private APIClient apiClient;
-
-    @BeforeEach
-    public void setup() {
-        apiClient = new APIClient();
-    }
+public class PostCreateTests extends BaseApiTest {
 
     @Test
     void shouldCreatePostWithNameAndReturnId201() {

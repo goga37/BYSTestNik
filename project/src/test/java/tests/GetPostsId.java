@@ -1,9 +1,7 @@
 package tests;
 
-import core.clients.APIClient;
 import core.models.ResponseGetUserId;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,13 +11,7 @@ import java.util.stream.IntStream;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GetPostsId {
-    private APIClient apiClient;
-
-    @BeforeEach
-    public void setup() {
-        apiClient = new APIClient();
-    }
+public class GetPostsId extends BaseApiTest {
 
     static IntStream ids() {
         return IntStream.rangeClosed(1, 100);
@@ -32,14 +24,14 @@ public class GetPostsId {
         Response response = apiClient.getPostsId(id);
 
         step("Проверка статус-кода");
-        assertEquals(200, response.getStatusCode(), "Статус код должен быть 200");
+        assertEquals(200, response.getStatusCode(), "Ожидали статус 200 для id=" + id + ", но пришёл " + response.getStatusCode());
 
         step("Десериализация JSON-ответа в объект ResponseGetUserId");
         ResponseGetUserId responseGetUserId = response.as(ResponseGetUserId.class);
 
         step("У пользователя заполнены title и body");
-        assertNotNull(responseGetUserId.getTitle());
-        assertNotNull(responseGetUserId.getBody());
+        assertNotNull(responseGetUserId.getTitle(),"Поле 'title' оказалось null для id=" + id + ". Response body: " + response.asString());
+        assertNotNull(responseGetUserId.getBody(),"Поле 'body' оказалось null для id=" + id + ". Response body: " + response.asString());
     }
 
     @Test
@@ -52,7 +44,7 @@ public class GetPostsId {
 
         step("Допускаем пустую строку или пустой JSON-объект");
         String body = response.asString();
-        assertTrue(body == null || body.isBlank() || body.trim().equals("{}"),
-                "Тело ответа должно быть пустым или {}. Actual:");
+        assertTrue(body == null || body.isBlank() || body.trim().equals("{1}"),
+                "Тело ответа должно быть пустым или {}");
     }
 }
