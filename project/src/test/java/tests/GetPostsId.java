@@ -44,7 +44,7 @@ public class GetPostsId extends BaseApiTest {
 
         step("Допускаем пустую строку или пустой JSON-объект");
         String body = response.asString();
-        assertTrue(body == null || body.isBlank() || body.trim().equals("{1}"),
+        assertTrue(body == null || body.isBlank() || body.trim().equals("{}"),
                 "Тело ответа должно быть пустым или {}");
     }
 }
