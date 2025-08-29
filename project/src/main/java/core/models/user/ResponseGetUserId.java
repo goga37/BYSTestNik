@@ -1,9 +1,9 @@
-package core.models;
+package core.models.user;
 
 import lombok.Data;
 
 @Data
-public class ResponsePostsPageLimit {
+public class ResponseGetUserId {
     public int userId;
     public int id;
     public String title;

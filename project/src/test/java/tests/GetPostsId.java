@@ -1,6 +1,6 @@
 package tests;
 
-import core.models.ResponseGetUserId;
+import core.models.user.ResponseGetUserId;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

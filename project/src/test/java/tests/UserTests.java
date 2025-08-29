@@ -1,7 +1,7 @@
 package tests;
 
 import io.restassured.common.mapper.TypeRef;
-import core.models.ResponseGetUser;
+import core.models.user.ResponseGetUser;
 import io.restassured.response.Response;
 import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;

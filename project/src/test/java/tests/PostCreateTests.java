@@ -1,7 +1,7 @@
 package tests;
 
 
-import core.models.ResponseCreateUser;
+import core.models.user.ResponseCreateUser;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 

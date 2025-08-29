@@ -1,5 +1,7 @@
-package core.models;
+package core.models.user;
 
+import core.models.common.Address;
+import core.models.common.Company;
 import lombok.Data;
 
 @Data

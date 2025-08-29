@@ -1,6 +1,6 @@
 package tests;
 
-import core.models.ResponsePostsPageLimit;
+import core.models.post.ResponsePostsPageLimit;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
